@@ -1,0 +1,93 @@
+
+// matrix-multiplication <Project2.cpp>
+// EE 312 Project 2 submission by
+// Mahek Kakkar
+// mk42458
+// Slip days used: 0
+// Fall 2021
+// Include the contents of this file at the top of every file that you submit, replacing the fields within <>.  Do not keep the <>.
+
+#include <stdio.h>
+#include <stdint.h>
+#include "MatrixMultiply.h"
+#include <cstdlib>
+
+void multiplyMatrices(
+        double a[],
+        const uint32_t a_rows,
+        const uint32_t a_cols,
+        double b[],
+        const uint32_t b_cols,
+        double c[]) {
+    // https://en.wikipedia.org/wiki/Row-_and_column-major_order
+    //intialization of matrix
+   int k = 0;
+    c[a_rows * b_cols]; //size of the matrix
+    while( k < (a_rows * b_cols) ){
+        c[k] = 0;
+        k++;
+    }
+    for (int i = 0; i < a_rows; i++) {
+        for (int j = 0; j < b_cols; j++) {
+            for (int z = 0; z < a_cols; z++) {
+                c[i * b_cols + j] += (a[i * a_cols + z] * b[z * b_cols + j]);  //equation
+            }
+        }
+    }
+}
+
+
+double** multiplyMatricesPtr(
+        double** a,
+        const uint32_t a_rows,
+        const uint32_t a_cols,
+        double** b,
+        const uint32_t b_cols) {
+double ** ptrArray;
+    ptrArray = (double **)malloc(sizeof(double *) * a_rows);
+    for (int i = 0; i < b_cols; i++) {
+        *(ptrArray + i) = (double *)malloc(sizeof(double) * b_cols);
+    }
+    for (int i = 0; i < a_rows; i++) {
+        for (int j = 0; j < b_cols; j++) {
+            ptrArray[i][j] = 0;
+            for (int z = 0; z < a_cols; z++) {
+                ptrArray[i][j] += a[i][z] * b[z][j]; // return product of matrix (a_rows * b_cols)
+            }
+        }
+    }
+return ptrArray;
+}
+
+
+
+// https://en.wikipedia.org/wiki/Transpose
+double** transposeMatrix(
+         double** a,
+         const uint32_t a_rows,
+         const uint32_t a_cols) {
+    // transpose: switching rows and columns
+    double **ptrArray = (double **) malloc(a_rows * (sizeof(double *)));
+    for (int y = 0; y < a_cols; y++) {
+        double *column = (double *) malloc(a_rows * sizeof(double));
+        ptrArray[y] = column;
+    }
+    for (int i = 0; i < a_cols; i++) {
+        for (int j = 0; j < a_rows; j++) {
+            ptrArray[i][j] = a[j][i]; //swap
+        }
+    }
+    return ptrArray;
+}
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

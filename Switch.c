@@ -1,7 +1,7 @@
 // Switch.c
 // This software to input from switches or buttons
 // Runs on TM4C123
-// Program written by: put your names here
+// Program written by: Mahek Kakkar and Aparna Narayan
 // Date Created: 3/6/17 
 // Last Modified: 1/14/21
 // Lab number: 10
